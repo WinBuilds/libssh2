@@ -1,6 +1,9 @@
 #ifndef LIBSSH2_CONFIG_H
 #define LIBSSH2_CONFIG_H
 
+#define HAVE_WINDOWS_H
+#define HAVE_WS2TCPIP_H
+
 #ifndef WIN32
 #define WIN32
 #endif
