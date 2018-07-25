@@ -1,3 +1,6 @@
+*.lnk
+*.VC.DB
+.vs/
 .deps
 .libs
 *.lib
