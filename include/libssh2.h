@@ -46,7 +46,7 @@
    to make the BANNER define (used by src/session.c) be a valid SSH
    banner. Release versions have no appended strings and may of course not
    have dashes either. */
-#define LIBSSH2_VERSION                             "1.8.1_DEV"
+#define LIBSSH2_VERSION                             "1.8.1.1"
 
 /* The numeric version number is also available "in parts" by using these
    defines: */
@@ -99,7 +99,6 @@ extern "C" {
 
 /* Allow alternate API prefix from CFLAGS or calling app */
 #ifndef LIBSSH2_API
-# ifdef LIBSSH2_WIN32
 #  ifdef _WINDLL
 #   ifdef LIBSSH2_LIBRARY
 #    define LIBSSH2_API __declspec(dllexport)
@@ -111,7 +110,6 @@ extern "C" {
 #  endif
 # else /* !LIBSSH2_WIN32 */
 #  define LIBSSH2_API
-# endif /* LIBSSH2_WIN32 */
 #endif /* LIBSSH2_API */
 
 #ifdef HAVE_SYS_UIO_H

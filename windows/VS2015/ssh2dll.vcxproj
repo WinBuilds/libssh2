@@ -40,6 +40,7 @@
     <ClCompile Include="..\..\src\transport.c" />
     <ClCompile Include="..\..\src\userauth.c" />
     <ClCompile Include="..\..\src\version.c" />
+    <ClCompile Include="..\..\src\wincng.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\src\channel.h" />
@@ -56,36 +57,36 @@
     <ClInclude Include="..\..\src\userauth.h" />
     <ClInclude Include="..\..\src\wincng.h" />
     <ClInclude Include="..\libssh2_config.h" />
+    <ClInclude Include="..\resource.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{3386A1EF-C272-43CE-BEBD-0D9C5A0B68E9}</ProjectGuid>
+    <ProjectGuid>{68432950-8C5D-45D8-B9AB-2693CC15881A}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>libssh2</RootNamespace>
+    <RootNamespace>ssh2dll</RootNamespace>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
-    <ProjectName>ssh2lib</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v140</PlatformToolset>
     <CharacterSet>NotSet</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v140</PlatformToolset>
     <WholeProgramOptimization>false</WholeProgramOptimization>
     <CharacterSet>NotSet</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v140</PlatformToolset>
     <CharacterSet>NotSet</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v140</PlatformToolset>
     <WholeProgramOptimization>false</WholeProgramOptimization>
@@ -110,19 +111,23 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <OutDir>$(SolutionDir)../../../../build_msvc14_$(Platform)/$(Configuration)/lib/</OutDir>
-    <IntDir>$(SolutionDir)../../../../build_msvc14_$(Platform)/$(Configuration)/obj/$(ProjectName)/</IntDir>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <OutDir>$(SolutionDir)../../../../build_msvc14_$(Platform)/$(Configuration)/lib/</OutDir>
+    <LinkIncremental>true</LinkIncremental>
+    <OutDir>$(SolutionDir)../../../../build_msvc14_$(Platform)/$(Configuration)/bin/</OutDir>
     <IntDir>$(SolutionDir)../../../../build_msvc14_$(Platform)/$(Configuration)/obj/$(ProjectName)/</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <OutDir>$(SolutionDir)../../../../build_msvc14_$(Platform)/$(Configuration)/lib/</OutDir>
+    <LinkIncremental>true</LinkIncremental>
+    <OutDir>$(SolutionDir)../../../../build_msvc14_$(Platform)/$(Configuration)/bin/</OutDir>
+    <IntDir>$(SolutionDir)../../../../build_msvc14_$(Platform)/$(Configuration)/obj/$(ProjectName)/</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+    <OutDir>$(SolutionDir)../../../../build_msvc14_$(Platform)/$(Configuration)/bin/</OutDir>
     <IntDir>$(SolutionDir)../../../../build_msvc14_$(Platform)/$(Configuration)/obj/$(ProjectName)/</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <OutDir>$(SolutionDir)../../../../build_msvc14_$(Platform)/$(Configuration)/lib/</OutDir>
+    <LinkIncremental>false</LinkIncremental>
+    <OutDir>$(SolutionDir)../../../../build_msvc14_$(Platform)/$(Configuration)/bin/</OutDir>
     <IntDir>$(SolutionDir)../../../../build_msvc14_$(Platform)/$(Configuration)/obj/$(ProjectName)/</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -131,24 +136,18 @@
       </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;_WINDOWS;_DEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_DEPRECATE;LIBSSH2_OPENSSL;LIBSSH2_DH_GEX_NEW=1;LIBSSH2_WIN32;LIBSSH2_CLEAR_MEMORY;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_USRDLL;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_DEPRECATE;LIBSSH2_OPENSSL;LIBSSH2_DH_GEX_NEW=1;LIBSSH2_WIN32;LIBSSH2_CLEAR_MEMORY;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>../;../../include/;$(OutDir)../include/</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <DisableSpecificWarnings>4244;4267;4996</DisableSpecificWarnings>
-      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <ImportLibrary>$(OutDir)..\lib\$(TargetName).lib</ImportLibrary>
+      <AdditionalDependencies>ws2_32.lib;openssl_cryptolib.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(OutDir)..\lib</AdditionalLibraryDirectories>
     </Link>
-    <Lib>
-      <AdditionalLibraryDirectories>$(SolutionDir)../../../../build_msvc14_$(Platform)/$(Configuration)/lib/</AdditionalLibraryDirectories>
-      <TargetMachine>MachineX86</TargetMachine>
-    </Lib>
-    <PostBuildEvent>
-      <Command>mkdir "$(SolutionDir)..\..\..\..\build_msvc14_$(Platform)\$(Configuration)\include\$(ProjectName)\"
-copy "$(SolutionDir)..\..\include\*.h" "$(SolutionDir)..\..\..\..\build_msvc14_$(Platform)\$(Configuration)\include\$(ProjectName)\"</Command>
-    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -156,23 +155,18 @@ copy "$(SolutionDir)..\..\include\*.h" "$(SolutionDir)..\..\..\..\build_msvc14_$
       </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;_WINDOWS;_DEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_DEPRECATE;LIBSSH2_OPENSSL;LIBSSH2_DH_GEX_NEW=1;LIBSSH2_WIN32;LIBSSH2_CLEAR_MEMORY;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_DEBUG;_WINDOWS;_USRDLL;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_DEPRECATE;LIBSSH2_OPENSSL;LIBSSH2_DH_GEX_NEW=1;LIBSSH2_WIN32;LIBSSH2_CLEAR_MEMORY;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>../;../../include/;$(OutDir)../include/</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <DisableSpecificWarnings>4244;4267;4996</DisableSpecificWarnings>
-      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <ImportLibrary>$(OutDir)..\lib\$(TargetName).lib</ImportLibrary>
+      <AdditionalDependencies>ws2_32.lib;openssl_cryptolib.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(OutDir)..\lib</AdditionalLibraryDirectories>
     </Link>
-    <Lib>
-      <AdditionalLibraryDirectories>$(SolutionDir)../../../../build_msvc14_$(Platform)/$(Configuration)/lib/</AdditionalLibraryDirectories>
-    </Lib>
-    <PostBuildEvent>
-      <Command>mkdir "$(SolutionDir)..\..\..\..\build_msvc14_$(Platform)\$(Configuration)\include\$(ProjectName)\"
-copy "$(SolutionDir)..\..\include\*.h" "$(SolutionDir)..\..\..\..\build_msvc14_$(Platform)\$(Configuration)\include\$(ProjectName)\"</Command>
-    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -182,26 +176,20 @@ copy "$(SolutionDir)..\..\include\*.h" "$(SolutionDir)..\..\..\..\build_msvc14_$
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_DEPRECATE;LIBSSH2_OPENSSL;LIBSSH2_DH_GEX_NEW=1;LIBSSH2_WIN32;LIBSSH2_CLEAR_MEMORY;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;_USRDLL;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_DEPRECATE;LIBSSH2_OPENSSL;LIBSSH2_DH_GEX_NEW=1;LIBSSH2_WIN32;LIBSSH2_CLEAR_MEMORY;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>../;../../include/;$(OutDir)../include/</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <DisableSpecificWarnings>4244;4267;4996</DisableSpecificWarnings>
-      <DebugInformationFormat>None</DebugInformationFormat>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
+      <ImportLibrary>$(OutDir)..\lib\$(TargetName).lib</ImportLibrary>
+      <AdditionalDependencies>ws2_32.lib;openssl_cryptolib.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(OutDir)..\lib</AdditionalLibraryDirectories>
     </Link>
-    <Lib>
-      <AdditionalLibraryDirectories>$(SolutionDir)../../../../build_msvc14_$(Platform)/$(Configuration)/lib/</AdditionalLibraryDirectories>
-      <TargetMachine>MachineX86</TargetMachine>
-    </Lib>
-    <PostBuildEvent>
-      <Command>mkdir "$(SolutionDir)..\..\..\..\build_msvc14_$(Platform)\$(Configuration)\include\$(ProjectName)\"
-copy "$(SolutionDir)..\..\include\*.h" "$(SolutionDir)..\..\..\..\build_msvc14_$(Platform)\$(Configuration)\include\$(ProjectName)\"</Command>
-    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -211,25 +199,20 @@ copy "$(SolutionDir)..\..\include\*.h" "$(SolutionDir)..\..\..\..\build_msvc14_$
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_DEPRECATE;LIBSSH2_OPENSSL;LIBSSH2_DH_GEX_NEW=1;LIBSSH2_WIN32;LIBSSH2_CLEAR_MEMORY;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NDEBUG;_WINDOWS;_USRDLL;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_DEPRECATE;LIBSSH2_OPENSSL;LIBSSH2_DH_GEX_NEW=1;LIBSSH2_WIN32;LIBSSH2_CLEAR_MEMORY;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>../;../../include/;$(OutDir)../include/</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <DisableSpecificWarnings>4244;4267;4996</DisableSpecificWarnings>
-      <DebugInformationFormat>None</DebugInformationFormat>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
+      <ImportLibrary>$(OutDir)..\lib\$(TargetName).lib</ImportLibrary>
+      <AdditionalDependencies>ws2_32.lib;openssl_cryptolib.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(OutDir)..\lib</AdditionalLibraryDirectories>
     </Link>
-    <Lib>
-      <AdditionalLibraryDirectories>$(SolutionDir)../../../../build_msvc14_$(Platform)/$(Configuration)/lib/</AdditionalLibraryDirectories>
-    </Lib>
-    <PostBuildEvent>
-      <Command>mkdir "$(SolutionDir)..\..\..\..\build_msvc14_$(Platform)\$(Configuration)\include\$(ProjectName)\"
-copy "$(SolutionDir)..\..\include\*.h" "$(SolutionDir)..\..\..\..\build_msvc14_$(Platform)\$(Configuration)\include\$(ProjectName)\"</Command>
-    </PostBuildEvent>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
