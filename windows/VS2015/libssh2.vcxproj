@@ -63,6 +63,7 @@
     <RootNamespace>libssh2</RootNamespace>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
     <ProjectName>ssh2lib</ProjectName>
+    <ProjectRoot>$(WINBUILDS_ROOT)</ProjectRoot>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -110,20 +111,20 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <OutDir>$(SolutionDir)../../../../build_msvc14_$(Platform)/$(Configuration)/lib/</OutDir>
-    <IntDir>$(SolutionDir)../../../../build_msvc14_$(Platform)/$(Configuration)/obj/$(ProjectName)/</IntDir>
+    <OutDir>$(ProjectRoot)build_msvc14_$(Platform)/$(Configuration)/lib/</OutDir>
+    <IntDir>$(ProjectRoot)build_msvc14_$(Platform)/$(Configuration)/obj/$(ProjectName)/</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <OutDir>$(SolutionDir)../../../../build_msvc14_$(Platform)/$(Configuration)/lib/</OutDir>
-    <IntDir>$(SolutionDir)../../../../build_msvc14_$(Platform)/$(Configuration)/obj/$(ProjectName)/</IntDir>
+    <OutDir>$(ProjectRoot)build_msvc14_$(Platform)/$(Configuration)/lib/</OutDir>
+    <IntDir>$(ProjectRoot)build_msvc14_$(Platform)/$(Configuration)/obj/$(ProjectName)/</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <OutDir>$(SolutionDir)../../../../build_msvc14_$(Platform)/$(Configuration)/lib/</OutDir>
-    <IntDir>$(SolutionDir)../../../../build_msvc14_$(Platform)/$(Configuration)/obj/$(ProjectName)/</IntDir>
+    <OutDir>$(ProjectRoot)build_msvc14_$(Platform)/$(Configuration)/lib/</OutDir>
+    <IntDir>$(ProjectRoot)build_msvc14_$(Platform)/$(Configuration)/obj/$(ProjectName)/</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <OutDir>$(SolutionDir)../../../../build_msvc14_$(Platform)/$(Configuration)/lib/</OutDir>
-    <IntDir>$(SolutionDir)../../../../build_msvc14_$(Platform)/$(Configuration)/obj/$(ProjectName)/</IntDir>
+    <OutDir>$(ProjectRoot)build_msvc14_$(Platform)/$(Configuration)/lib/</OutDir>
+    <IntDir>$(ProjectRoot)build_msvc14_$(Platform)/$(Configuration)/obj/$(ProjectName)/</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -146,8 +147,8 @@
       <TargetMachine>MachineX86</TargetMachine>
     </Lib>
     <PostBuildEvent>
-      <Command>mkdir "$(SolutionDir)..\..\..\..\build_msvc14_$(Platform)\$(Configuration)\include\$(ProjectName)\"
-copy "$(SolutionDir)..\..\include\*.h" "$(SolutionDir)..\..\..\..\build_msvc14_$(Platform)\$(Configuration)\include\$(ProjectName)\"</Command>
+      <Command>mkdir "$(ProjectRoot)build_msvc14_$(Platform)\$(Configuration)\include\$(ProjectName)\"
+copy "$(SolutionDir)..\..\include\*.h" "$(ProjectRoot)build_msvc14_$(Platform)\$(Configuration)\include\$(ProjectName)\"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -170,8 +171,8 @@ copy "$(SolutionDir)..\..\include\*.h" "$(SolutionDir)..\..\..\..\build_msvc14_$
       <AdditionalLibraryDirectories>$(SolutionDir)../../../../build_msvc14_$(Platform)/$(Configuration)/lib/</AdditionalLibraryDirectories>
     </Lib>
     <PostBuildEvent>
-      <Command>mkdir "$(SolutionDir)..\..\..\..\build_msvc14_$(Platform)\$(Configuration)\include\$(ProjectName)\"
-copy "$(SolutionDir)..\..\include\*.h" "$(SolutionDir)..\..\..\..\build_msvc14_$(Platform)\$(Configuration)\include\$(ProjectName)\"</Command>
+      <Command>mkdir "$(ProjectRoot)build_msvc14_$(Platform)\$(Configuration)\include\$(ProjectName)\"
+copy "$(SolutionDir)..\..\include\*.h" "$(ProjectRoot)build_msvc14_$(Platform)\$(Configuration)\include\$(ProjectName)\"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -199,8 +200,8 @@ copy "$(SolutionDir)..\..\include\*.h" "$(SolutionDir)..\..\..\..\build_msvc14_$
       <TargetMachine>MachineX86</TargetMachine>
     </Lib>
     <PostBuildEvent>
-      <Command>mkdir "$(SolutionDir)..\..\..\..\build_msvc14_$(Platform)\$(Configuration)\include\$(ProjectName)\"
-copy "$(SolutionDir)..\..\include\*.h" "$(SolutionDir)..\..\..\..\build_msvc14_$(Platform)\$(Configuration)\include\$(ProjectName)\"</Command>
+      <Command>mkdir "$(ProjectRoot)build_msvc14_$(Platform)\$(Configuration)\include\$(ProjectName)\"
+copy "$(SolutionDir)..\..\include\*.h" "$(ProjectRoot)build_msvc14_$(Platform)\$(Configuration)\include\$(ProjectName)\"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -227,8 +228,8 @@ copy "$(SolutionDir)..\..\include\*.h" "$(SolutionDir)..\..\..\..\build_msvc14_$
       <AdditionalLibraryDirectories>$(SolutionDir)../../../../build_msvc14_$(Platform)/$(Configuration)/lib/</AdditionalLibraryDirectories>
     </Lib>
     <PostBuildEvent>
-      <Command>mkdir "$(SolutionDir)..\..\..\..\build_msvc14_$(Platform)\$(Configuration)\include\$(ProjectName)\"
-copy "$(SolutionDir)..\..\include\*.h" "$(SolutionDir)..\..\..\..\build_msvc14_$(Platform)\$(Configuration)\include\$(ProjectName)\"</Command>
+      <Command>mkdir "$(ProjectRoot)build_msvc14_$(Platform)\$(Configuration)\include\$(ProjectName)\"
+copy "$(SolutionDir)..\..\include\*.h" "$(ProjectRoot)build_msvc14_$(Platform)\$(Configuration)\include\$(ProjectName)\"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
